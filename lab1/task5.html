@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ряд</title>
+  </head>
+  <body>
+    <h1>Завдання 5</h1>
+    <p>Введіть значення змінних:</p>
+    <label for="x">x:</label>
+    <input type="number" id="x" name="x" /><br />
+    <label for="y">y:</label>
+    <input type="number" id="y" name="y" /><br />
+    <button onclick="calculateSum()">Обчислити</button>
+    <p>Сума ряду: <span id="sum"></span></p>
+
+    <script>
+      function calculateSum() {
+        let x = parseFloat(document.getElementById("x").value);
+        let y = parseFloat(document.getElementById("y").value);
+
+        let sum = 0;
+        for (let i = 3; i <= 5; i++) {
+          sum +=
+            (Math.pow(-1, i + 1) * (x * x - Math.pow(y, 3) + 3)) /
+            (factorial(i) - 5 * x);
+        }
+
+        document.getElementById("sum").innerHTML = sum;
+      }
+
+      function factorial(n) {
+        if (n === 0) {
+          return 1;
+        }
+        return n * factorial(n - 1);
+      }
+    </script>
+    <a href="./lab1.html">Лабораторна 1</a>
+    <a href="../index.html">На головну</a>
+  </body>
+</html>

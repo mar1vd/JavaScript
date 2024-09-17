@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Склад товарів</title>
+    <h1>Завдання 6</h1>
+    <script language="JavaScript">
+      let products = ["Мишка", "Іграшка", "Ліхтар"];
+      let quantities = [105, 50, 200];
+      let costs = [100, 150, 45];
+
+      let selectedProductIndex = -1;
+      function fun1() {
+        // Отримуємо введену користувачем назву товару
+        let productName = document.form1.product_name.value;
+        // Шукаємо товар у списку
+        selectedProductIndex = products.indexOf(productName);
+        if (selectedProductIndex !== -1) {
+          document.form1.output_quantity.value =
+            "Кількість: " + quantities[selectedProductIndex];
+          document.form1.output_cost.value =
+            "Вартість: " + costs[selectedProductIndex] + " грн";
+        } else {
+          document.form1.output_quantity.value = "Товар не знайдено";
+          document.form1.output_cost.value = "";
+        }
+      }
+
+      function fun2() {
+        if (selectedProductIndex !== -1) {
+          let totalCost =
+            quantities[selectedProductIndex] * costs[selectedProductIndex];
+          document.form1.output_total.value =
+            "Загальна сума: " + totalCost + " грн";
+        } else {
+          document.form1.output_total.value = "Спочатку виберіть товар";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Склад товарів</h1>
+    <form name="form1">
+      Введіть назву товару:
+      <input type="text" name="product_name" />
+      <input
+        type="button"
+        value="Наявна кількість і вартість"
+        onClick="fun1()"
+      />
+      <br /><br />
+
+      <input type="text" size="70" name="output_quantity" readonly />
+      <br />
+      <input type="text" size="70" name="output_cost" readonly />
+      <br /><br />
+
+      <input type="button" value="Загальна сума" onClick="fun2()" />
+      <br /><br />
+
+      <input type="text" size="70" name="output_total" readonly />
+    </form>
+    <a href="./lab1.html">Лабораторна 1</a>
+    <a href="../index.html">На головну</a>
+  </body>
+</html>
