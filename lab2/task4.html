@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="./lab2.html">Лабораторна робота 2</a>
+    <a href="../index.html">На головну</a>
+    <script>
+      let a = 5;
+      let b = 2;
+      let remainder = a % b;
+      console.log("Остача від ділення", a, "на", b, "становить:", remainder);
+      let isRemainderZero = remainder === 0;
+      console.log(
+        "Остача від ділення",
+        a,
+        "на",
+        b,
+        "рівна нулю:",
+        isRemainderZero
+      );
+      let numbers = [1, 2, 3, 4, 5];
+      for (let i = 0; i < numbers.length; i++) {
+        console.log(
+          "Число %d: %s",
+          numbers[i],
+          numbers[i] % 2 === 0 ? "парне" : "непарне"
+        );
+      }
+    </script>
+  </body>
+</html>

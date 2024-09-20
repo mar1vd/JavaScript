@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Динамічне створення таблиці</title>
+    <a href="./lab2.html">Лабораторна робота 2</a>
+    <a href="../index.html">На головну</a>
+    <script type="text/javascript">
+      function generateTable() {
+        var numRows = document.getElementById("numRows").value;
+        var numCols = document.getElementById("numCols").value;
+        var tableContent = "<table border='1'>";
+
+        for (var i = 1; i <= numRows; i++) {
+          tableContent += "<tr>";
+          for (var j = 1; j <= numCols; j++) {
+            tableContent += "<td>" + ((2 * i) / j).toFixed(2) + "</td>";
+          }
+          tableContent += "</tr>";
+        }
+
+        // Підрахунок суми елементів другого рядка
+        var sumSecondRow = 0;
+        if (numRows >= 2) {
+          for (var k = 1; k <= numCols; k++) {
+            sumSecondRow += (2 * 2) / k;
+          }
+          alert("Сума елементів другого рядка: " + sumSecondRow.toFixed(2));
+        }
+
+        tableContent += "</table>";
+        document.getElementById("tableContainer").innerHTML = tableContent;
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Динамічне створення таблиці</h2>
+    <label for="numRows">Кількість рядків:</label>
+    <input type="number" id="numRows" name="numRows" min="1" /><br /><br />
+    <label for="numCols">Кількість стовпців:</label>
+    <input type="number" id="numCols" name="numCols" min="1" /><br /><br />
+    <button onclick="generateTable()">Створити таблицю</button>
+    <div id="tableContainer"></div>
+  </body>
+</html>

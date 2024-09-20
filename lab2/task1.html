@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Годинник</title>
+    <style>
+      #clock {
+        font-size: 48px;
+        font-weight: bold;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab2.html">Лабораторна робота 2</a>
+    <a href="../index.html">На головну</a>
+    <div id="clock"></div>
+
+    <script>
+      function updateClock() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0"); // Місяці з 0
+        const day = String(now.getDate()).padStart(2, "0");
+        const hour = String(now.getHours()).padStart(2, "0");
+        const minute = String(now.getMinutes()).padStart(2, "0");
+        const second = String(now.getSeconds()).padStart(2, "0");
+
+        const formattedTime = `${year}:${month}:${day}:${hour}:${minute}:${second}`;
+        document.getElementById("clock").innerText = formattedTime;
+      }
+
+      setInterval(updateClock, 1000);
+      updateClock(); // Для миттєвого оновлення при завантаженні
+    </script>
+  </body>
+</html>

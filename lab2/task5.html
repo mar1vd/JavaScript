@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="./lab2.html">Лабораторна робота 2</a>
+    <a href="../index.html">На головну</a>
+    <script>
+      // console.info()
+      console.info("Це інформаційне повідомлення");
+
+      // console.warn()
+      console.warn("Це попередження!");
+
+      // console.error()
+      console.error("Це повідомлення про помилку");
+
+      // console.dir()
+      const obj = { name: "Alice", age: 25 };
+      console.dir(obj);
+
+      // console.dirxml()
+      const element = document.createElement("div");
+      console.dirxml(element);
+
+      // console.time() і console.timeEnd()
+      console.time("myTimer");
+      for (let i = 0; i < 1000000; i++) {} // Проста затримка
+      console.timeEnd("myTimer");
+
+      // console.profile() і console.profileEnd()
+      console.profile("MyProfile");
+      // Код, який потрібно профілювати
+      for (let i = 0; i < 1000000; i++) {}
+      console.profileEnd("MyProfile");
+
+      // console.assert()
+      console.assert(
+        false,
+        "Це повідомлення виведеться, оскільки вираз хибний"
+      );
+    </script>
+  </body>
+</html>
