@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ієрархія фруктів та овочів</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      ul {
+        list-style-type: none;
+        padding-left: 20px;
+      }
+      .toggle {
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab3.html">лабораторна робота 3</a>
+    <a href="../index.html">На головну</a>
+    <h1>Ієрархія фруктів та овочів</h1>
+    <ul>
+      <li class="toggle">
+        Фрукти
+        <ul>
+          <li>Яблуко</li>
+          <li>Ананас</li>
+          <li>Абрикос</li>
+          <li>Груша</li>
+          <li>Лимон</li>
+        </ul>
+      </li>
+      <li class="toggle">
+        Овочі
+        <ul>
+          <li>Картопля</li>
+          <li>Буряк</li>
+          <li>Морква</li>
+          <li>Груша</li>
+        </ul>
+      </li>
+    </ul>
+
+    <script>
+      document.querySelectorAll(".toggle").forEach((item) => {
+        item.addEventListener("click", function () {
+          const subList = this.querySelector("ul");
+          if (
+            subList.style.display === "none" ||
+            subList.style.display === ""
+          ) {
+            subList.style.display = "block";
+          } else {
+            subList.style.display = "none";
+          }
+        });
+
+        // Сховати підсписки за замовчуванням
+        const subList = item.querySelector("ul");
+        if (subList) {
+          subList.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

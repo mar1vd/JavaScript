@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Галерея зображень</title>
+    <style>
+      #image-container {
+        text-align: center;
+        margin: 20px;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      button {
+        margin: 5px;
+        padding: 10px 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab3.html">лабораторна робота 3</a>
+    <a href="../index.html">На головну</a>
+    <h1>Галерея зображень</h1>
+    <div id="image-container">
+      <img id="image" src="" alt="Зображення" />
+    </div>
+    <button id="prev">Назад</button>
+    <button id="next">Вперед</button>
+
+    <script>
+      // Масив з назвами файлів зображень
+      const images = ["file1.jpg", "file2.jpg", "file3.jpg", "file4.jpg"];
+      let currentIndex = 0;
+
+      // Функція для відображення зображення
+      function displayImage() {
+        const imageElement = document.getElementById("image");
+        imageElement.src = images[currentIndex];
+      }
+
+      // Обробники подій для кнопок
+      document.getElementById("prev").onclick = () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length; // Циклічний перехід назад
+        displayImage();
+      };
+
+      document.getElementById("next").onclick = () => {
+        currentIndex = (currentIndex + 1) % images.length; // Циклічний перехід вперед
+        displayImage();
+      };
+
+      // Показати перше зображення при завантаженні
+      displayImage();
+    </script>
+  </body>
+</html>
