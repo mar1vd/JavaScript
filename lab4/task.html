@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Тестування</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      table {
+        margin-top: 20px;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab4.html">Лабораторна робота 4</a>
+    <a href="../index.html">На головну</a>
+    <h1>Тестування</h1>
+    <form id="testForm">
+      <h3>1. Який колір небо?</h3>
+      <label><input type="radio" name="q1" value="0" /> Зелений</label><br />
+      <label><input type="radio" name="q1" value="1" /> Синій</label><br />
+      <label><input type="radio" name="q1" value="0" /> Червоний</label><br />
+      <label><input type="radio" name="q1" value="0" /> Жовтий</label><br />
+
+      <h3>2. Яка планета найбільша?</h3>
+      <label><input type="radio" name="q2" value="0" /> Земля</label><br />
+      <label><input type="radio" name="q2" value="1" /> Юпітер</label><br />
+      <label><input type="radio" name="q2" value="0" /> Марс</label><br />
+      <label><input type="radio" name="q2" value="0" /> Венера</label><br />
+
+      <h3>3. Виберіть правильні фрукти:</h3>
+      <label><input type="checkbox" name="q3" value="1" /> Яблуко</label><br />
+      <label><input type="checkbox" name="q3" value="1" /> Груша</label><br />
+      <label><input type="checkbox" name="q3" value="0" /> Огірок</label><br />
+      <label><input type="checkbox" name="q3" value="0" /> Морква</label><br />
+
+      <h3>4. Виберіть правильні овочі:</h3>
+      <label><input type="checkbox" name="q4" value="1" /> Броколі</label><br />
+      <label><input type="checkbox" name="q4" value="1" /> Капуста</label><br />
+      <label><input type="checkbox" name="q4" value="0" /> Яблуко</label><br />
+      <label><input type="checkbox" name="q4" value="0" /> Груша</label><br />
+
+      <h3>5. Який континент найбільший?</h3>
+      <select name="q5">
+        <option value="0">Азія</option>
+        <option value="1">Європа</option>
+        <option value="0">Північна Америка</option>
+        <option value="0">Австралія</option>
+      </select>
+
+      <h3>6. Які кольори на прапорі Франції?</h3>
+      <select name="q6" multiple>
+        <option value="0">Зелений</option>
+        <option value="1">Білий</option>
+        <option value="1">Синій</option>
+        <option value="0">Червоний</option>
+      </select>
+
+      <h3>7. Введіть столицю України:</h3>
+      <input type="text" name="q7" />
+
+      <button type="button" onclick="calculateResult()">
+        Завершити тестування
+      </button>
+    </form>
+
+    <h2>Результати:</h2>
+    <table id="resultsTable">
+      <thead>
+        <tr>
+          <th>Запитання</th>
+          <th>Вибрані варіанти</th>
+          <th>Отримані бали</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <h3>Загальний бал: <span id="totalScore">0</span></h3>
+
+    <script>
+      function calculateResult() {
+        let totalScore = 0;
+        const resultsTable = document
+          .getElementById("resultsTable")
+          .getElementsByTagName("tbody")[0];
+        resultsTable.innerHTML = ""; // Очищуємо таблицю перед заповненням
+
+        function addRow(question, selectedAnswers, score) {
+          const row = resultsTable.insertRow();
+          row.insertCell(0).innerHTML = question;
+          row.insertCell(1).innerHTML = selectedAnswers;
+          row.insertCell(2).innerHTML = score;
+        }
+
+        // Question 1: Radio buttons
+        let q1Score = 0;
+        const q1Options = document.getElementsByName("q1");
+        for (let i = 0; i < q1Options.length; i++) {
+          if (q1Options[i].type === "radio" && q1Options[i].checked) {
+            q1Score = parseFloat(q1Options[i].value);
+            addRow(
+              "1. Який колір небо?",
+              q1Options[i].parentNode.innerText,
+              q1Score
+            );
+          }
+        }
+        totalScore += q1Score;
+
+        // Question 2: Radio buttons
+        let q2Score = 0;
+        const q2Options = document.getElementsByName("q2");
+        for (let i = 0; i < q2Options.length; i++) {
+          if (q2Options[i].type === "radio" && q2Options[i].checked) {
+            q2Score = parseFloat(q2Options[i].value);
+            addRow(
+              "2. Яка планета найбільша?",
+              q2Options[i].parentNode.innerText,
+              q2Score
+            );
+          }
+        }
+        totalScore += q2Score;
+
+        // Question 3: Checkboxes
+        const q3Checks = document.querySelectorAll('input[name="q3"]:checked');
+        let q3Score = 0;
+        if (q3Checks.length === 2) {
+          q3Score = Array.from(q3Checks).reduce(
+            (sum, checkbox) => sum + parseFloat(checkbox.value),
+            0
+          );
+          const q3Selected = Array.from(q3Checks)
+            .map((checkbox) => checkbox.parentNode.innerText)
+            .join(", ");
+          addRow("3. Виберіть правильні фрукти:", q3Selected, q3Score);
+        }
+        totalScore += q3Score;
+
+        // Question 4: Checkboxes
+        const q4Checks = document.querySelectorAll('input[name="q4"]:checked');
+        let q4Score = 0;
+        if (q4Checks.length === 2) {
+          q4Score = Array.from(q4Checks).reduce(
+            (sum, checkbox) => sum + parseFloat(checkbox.value),
+            0
+          );
+          const q4Selected = Array.from(q4Checks)
+            .map((checkbox) => checkbox.parentNode.innerText)
+            .join(", ");
+          addRow("4. Виберіть правильні овочі:", q4Selected, q4Score);
+        }
+        totalScore += q4Score;
+
+        // Question 5: Single select list
+        const q5Select = document.querySelector('select[name="q5"]');
+        let q5Score = parseFloat(q5Select.value);
+        let q5Selected = q5Select.options[q5Select.selectedIndex].text;
+        addRow("5. Який континент найбільший?", q5Selected, q5Score);
+        totalScore += q5Score;
+
+        // Question 6: Multiple select list
+        const q6SelectedOptions = Array.from(
+          document.querySelector('select[name="q6"]').selectedOptions
+        );
+        let q6Score = 0;
+        if (q6SelectedOptions.length === 2) {
+          q6Score = q6SelectedOptions.reduce(
+            (sum, option) => sum + parseFloat(option.value),
+            0
+          );
+          const q6Selected = q6SelectedOptions
+            .map((option) => option.text)
+            .join(", ");
+          addRow("6. Які кольори на прапорі Франції?", q6Selected, q6Score);
+        }
+        totalScore += q6Score;
+
+        // Question 7: Single-line text input
+        let q7Answer = document.querySelector('input[name="q7"]').value.trim();
+        let q7Score = q7Answer.toLowerCase() === "київ" ? 1 : 0;
+        addRow("7. Введіть столицю України:", q7Answer, q7Score);
+        totalScore += q7Score;
+
+        // Output total score
+        document.getElementById("totalScore").innerHTML = totalScore;
+        return false; // Prevent form submission
+      }
+    </script>
+  </body>
+</html>
