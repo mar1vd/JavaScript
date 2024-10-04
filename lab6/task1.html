@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Розбір e-mail</title>
+  </head>
+  <body>
+    <a href="./lab6.html">Лабораторна</a>
+    <a href="../index.html">На головну</a>
+    <h1>Розбір e-mail адреси</h1>
+
+    <p>Елементи e-mail будуть виведені нижче:</p>
+
+    <div id="output"></div>
+
+    <script>
+      // E-mail для розбору
+      let s = "dwbyu@mail.ua";
+
+      // Регулярний вираз для e-mail
+      let r = /^([a-z0-9]+)(\.[a-z0-9]+)*@([a-z0-9]+)(\.[a-z0-9]+)*$/i;
+
+      // Виконання розбору e-mail за допомогою регулярного виразу
+      let a = s.match(r);
+
+      // Контейнер для виводу результату
+      let outputDiv = document.getElementById("output");
+
+      if (a) {
+        // Виведення кожного елемента e-mail
+        for (let i = 0; i < a.length; i++) {
+          let element = document.createElement("p");
+          element.innerHTML = "<hr> a[" + i + "] " + a[i];
+          outputDiv.appendChild(element);
+        }
+      } else {
+        // Виведення повідомлення про невірний формат e-mail
+        let errorElement = document.createElement("p");
+        errorElement.innerHTML = "Невірний формат e-mail";
+        outputDiv.appendChild(errorElement);
+      }
+    </script>
+  </body>
+</html>

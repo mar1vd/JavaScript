@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Форма з перевіркою</title>
+    <style>
+      .valid {
+        border-color: green;
+      }
+      .invalid {
+        border-color: red;
+      }
+      .error-message {
+        color: red;
+      }
+      .success-icon {
+        color: green;
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab6.html">Лабораторна</a>
+    <a href="../index.html">На головну</a>
+    <form id="validationForm">
+      <label for="email">E-mail:</label>
+      <input type="text" id="email" name="email" /><br /><br />
+
+      <label for="fullname">Ім’я та прізвище:</label>
+      <input type="text" id="fullname" name="fullname" /><br /><br />
+
+      <label for="login">Логін:</label>
+      <input type="text" id="login" name="login" /><br /><br />
+
+      <label for="password">Пароль:</label>
+      <input type="password" id="password" name="password" /><br /><br />
+
+      <label for="zipcode">Поштовий індекс:</label>
+      <input type="text" id="zipcode" name="zipcode" /><br /><br />
+
+      <button type="button" onclick="validateForm()">Відправити</button>
+    </form>
+
+    <script>
+      function validateForm() {
+        const email = document.getElementById("email");
+        const fullname = document.getElementById("fullname");
+        const login = document.getElementById("login");
+        const password = document.getElementById("password");
+        const zipcode = document.getElementById("zipcode");
+
+        let valid = true;
+
+        // Перевірка e-mail (дозволяється будь-який загальноприйнятий формат e-mail)
+        const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+        if (!emailRegex.test(email.value)) {
+          setInvalid(email, "Введіть дійсну e-mail адресу");
+          valid = false;
+        } else {
+          setValid(email);
+        }
+
+        // Перевірка ім'я та прізвища
+        const fullnameRegex = /^[A-ZА-Я][a-zа-я]+ [A-ZА-Я][a-zа-я]+$/;
+        if (!fullnameRegex.test(fullname.value)) {
+          setInvalid(
+            fullname,
+            "Ім’я та прізвище має починатися з великої літери"
+          );
+          valid = false;
+        } else {
+          setValid(fullname);
+        }
+
+        // Перевірка логіну
+        const loginRegex = /^[a-zA-Z0-9]+$/;
+        if (!loginRegex.test(login.value)) {
+          setInvalid(login, "Логін має містити лише латинські літери та цифри");
+          valid = false;
+        } else {
+          setValid(login);
+        }
+
+        // Перевірка паролю
+        const passwordRegex =
+          /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[_\-!@#$%^&*]).{8,}$/;
+        if (!passwordRegex.test(password.value)) {
+          setInvalid(
+            password,
+            "Пароль має бути мінімум 8 символів і містити букву, цифру і спецсимвол"
+          );
+          valid = false;
+        } else {
+          setValid(password);
+        }
+
+        // Перевірка поштового індексу
+        const zipcodeRegex = /^[0-9]{5}$/;
+        if (!zipcodeRegex.test(zipcode.value)) {
+          setInvalid(zipcode, "Поштовий індекс повинен складатися з 5 цифр");
+          valid = false;
+        } else {
+          setValid(zipcode);
+        }
+
+        if (valid) {
+          alert("Форма заповнена вірно!");
+        }
+      }
+
+      function setValid(element) {
+        element.classList.remove("invalid");
+        element.classList.add("valid");
+        removeErrorMessage(element);
+        addSuccessIcon(element);
+      }
+
+      function setInvalid(element, message) {
+        element.classList.remove("valid");
+        element.classList.add("invalid");
+        showErrorMessage(element, message);
+        removeSuccessIcon(element);
+      }
+
+      function showErrorMessage(element, message) {
+        let errorMessage = element.nextElementSibling;
+        if (
+          !errorMessage ||
+          !errorMessage.classList.contains("error-message")
+        ) {
+          errorMessage = document.createElement("span");
+          errorMessage.classList.add("error-message");
+          element.parentNode.insertBefore(errorMessage, element.nextSibling);
+        }
+        errorMessage.textContent = message;
+      }
+
+      function removeErrorMessage(element) {
+        let errorMessage = element.nextElementSibling;
+        if (errorMessage && errorMessage.classList.contains("error-message")) {
+          errorMessage.remove();
+        }
+      }
+
+      function addSuccessIcon(element) {
+        let successIcon = element.nextElementSibling;
+        if (!successIcon || !successIcon.classList.contains("success-icon")) {
+          successIcon = document.createElement("span");
+          successIcon.classList.add("success-icon");
+          successIcon.innerHTML = "✔";
+          element.parentNode.insertBefore(successIcon, element.nextSibling);
+        }
+      }
+
+      function removeSuccessIcon(element) {
+        let successIcon = element.nextElementSibling;
+        if (successIcon && successIcon.classList.contains("success-icon")) {
+          successIcon.remove();
+        }
+      }
+    </script>
+  </body>
+</html>
