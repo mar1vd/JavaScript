@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Завдання 3</title>
+  </head>
+  <body>
+    <a href="./lab7.html">Лабораторна</a>
+    <a href="../index.html"> На головну</a>
+    <h1>Завдання 3</h1>
+
+    <!-- Функція 3.1 -->
+    <div>
+      <h3>3.1. Snake Case ➔ Lower Camel Case</h3>
+      <input
+        type="text"
+        id="snakeInput"
+        placeholder="Введіть Snake Case рядок (через кому)"
+      />
+      <button onclick="toCamelCase()">Обробити</button>
+      <p>Вхідний масив: <span id="inputSnakeArray"></span></p>
+      <p>Вихідний масив: <span id="outputCamelArray"></span></p>
+    </div>
+
+    <!-- Функція 3.2 -->
+    <div>
+      <h3>3.2. Lower Camel Case ➔ Snake Case</h3>
+      <input
+        type="text"
+        id="camelInput"
+        placeholder="Введіть Lower Camel Case рядок (через кому)"
+      />
+      <button onclick="toSnakeCase()">Обробити</button>
+      <p>Вхідний масив: <span id="inputCamelArray"></span></p>
+      <p>Вихідний масив: <span id="outputSnakeArray"></span></p>
+    </div>
+
+    <!-- Функція 3.3 -->
+    <div>
+      <h3>3.3. Замінити формат дати</h3>
+      <textarea
+        id="textInput"
+        placeholder="Введіть текст із датами у форматі yyyy/mm/dd"
+        rows="4"
+        cols="50"
+      ></textarea>
+      <button onclick="replaceDateFormat()">Обробити</button>
+      <p>Результат: <span id="dateResult"></span></p>
+    </div>
+
+    <script>
+      // Функція 3.1: Перетворити з Snake Case на Lower Camel Case
+      function toCamelCase() {
+        const input = document.getElementById("snakeInput").value;
+        const snakeArray = input.split(",").map((str) => str.trim());
+        const camelArray = snakeArray.map((snakeStr) =>
+          snakeStr.replace(/_([a-z])/g, (match, p1) => p1.toUpperCase())
+        );
+
+        document.getElementById("inputSnakeArray").innerText =
+          JSON.stringify(snakeArray);
+        document.getElementById("outputCamelArray").innerText =
+          JSON.stringify(camelArray);
+      }
+
+      // Функція 3.2: Перетворити з Lower Camel Case на Snake Case
+      function toSnakeCase() {
+        const input = document.getElementById("camelInput").value;
+        const camelArray = input.split(",").map((str) => str.trim());
+        const snakeArray = camelArray.map((camelStr) =>
+          camelStr.replace(/([A-Z])/g, "_$1").toLowerCase()
+        );
+
+        document.getElementById("inputCamelArray").innerText =
+          JSON.stringify(camelArray);
+        document.getElementById("outputSnakeArray").innerText =
+          JSON.stringify(snakeArray);
+      }
+
+      // Функція 3.3: Замінити формат дати з yyyy/mm/dd на dd.mm.yyyy
+      function replaceDateFormat() {
+        const text = document.getElementById("textInput").value;
+        const result = text.replace(
+          /\b(\d{4})\/(\d{2})\/(\d{2})\b/g,
+          "$3.$2.$1"
+        );
+        document.getElementById("dateResult").innerText = result;
+      }
+    </script>
+  </body>
+</html>
