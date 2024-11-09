@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Лабораторна робота</title>
+  </head>
+  <body>
+    <a href="../index.html">На головну</a>
+    <a href="./lab8.html">Лабораторна робота</a>
+    <h2>Завдання 1: Опис об'єкта часу та функцій для роботи з ним</h2>
+
+    <div>
+      <h3>1.1 Виведення поточного часу</h3>
+      <button onclick="displayTime()">Виконати</button>
+      <p id="time-output"></p>
+    </div>
+
+    <div>
+      <h3>1.2 Зміна часу на передану кількість секунд</h3>
+      <input type="number" id="seconds-input" placeholder="Введіть секунди" />
+      <button onclick="changeSeconds()">Змінити</button>
+      <p id="seconds-output"></p>
+    </div>
+
+    <div>
+      <h3>1.3 Зміна часу на передану кількість хвилин</h3>
+      <input type="number" id="minutes-input" placeholder="Введіть хвилини" />
+      <button onclick="changeMinutes()">Змінити</button>
+      <p id="minutes-output"></p>
+    </div>
+
+    <div>
+      <h3>1.4 Зміна часу на передану кількість годин</h3>
+      <input type="number" id="hours-input" placeholder="Введіть години" />
+      <button onclick="changeHours()">Змінити</button>
+      <p id="hours-output"></p>
+    </div>
+
+    <script>
+      // Об'єкт для опису часу
+      const now = new Date();
+      let time = {
+        hours: now.getHours(),
+        minutes: now.getMinutes(),
+        seconds: now.getSeconds(),
+      };
+
+      // 1.1 Функція виведення поточного часу на екран
+      function displayTime() {
+        document.getElementById(
+          "time-output"
+        ).innerText = `Поточний час: ${String(time.hours).padStart(
+          2,
+          "0"
+        )}:${String(time.minutes).padStart(2, "0")}:${String(
+          time.seconds
+        ).padStart(2, "0")}`;
+      }
+
+      // 1.2 Функція зміни часу на передану кількість секунд
+      function changeSeconds() {
+        const seconds = parseInt(
+          document.getElementById("seconds-input").value
+        );
+        let totalSeconds =
+          time.hours * 3600 + time.minutes * 60 + time.seconds + seconds;
+        time.hours = Math.floor(totalSeconds / 3600) % 24;
+        time.minutes = Math.floor((totalSeconds % 3600) / 60);
+        time.seconds = totalSeconds % 60;
+        document.getElementById(
+          "seconds-output"
+        ).innerText = `Час після зміни секунд: ${String(time.hours).padStart(
+          2,
+          "0"
+        )}:${String(time.minutes).padStart(2, "0")}:${String(
+          time.seconds
+        ).padStart(2, "0")}`;
+      }
+
+      // 1.3 Функція зміни часу на передану кількість хвилин
+      function changeMinutes() {
+        const minutes = parseInt(
+          document.getElementById("minutes-input").value
+        );
+        let totalSeconds =
+          time.hours * 3600 + time.minutes * 60 + time.seconds + minutes * 60;
+        time.hours = Math.floor(totalSeconds / 3600) % 24;
+        time.minutes = Math.floor((totalSeconds % 3600) / 60);
+        time.seconds = totalSeconds % 60;
+        document.getElementById(
+          "minutes-output"
+        ).innerText = `Час після зміни хвилин: ${String(time.hours).padStart(
+          2,
+          "0"
+        )}:${String(time.minutes).padStart(2, "0")}:${String(
+          time.seconds
+        ).padStart(2, "0")}`;
+      }
+
+      // 1.4 Функція зміни часу на передану кількість годин
+      function changeHours() {
+        const hours = parseInt(document.getElementById("hours-input").value);
+        let totalSeconds =
+          time.hours * 3600 + time.minutes * 60 + time.seconds + hours * 3600;
+        time.hours = Math.floor(totalSeconds / 3600) % 24;
+        time.minutes = Math.floor((totalSeconds % 3600) / 60);
+        time.seconds = totalSeconds % 60;
+        document.getElementById(
+          "hours-output"
+        ).innerText = `Час після зміни годин: ${String(time.hours).padStart(
+          2,
+          "0"
+        )}:${String(time.minutes).padStart(2, "0")}:${String(
+          time.seconds
+        ).padStart(2, "0")}`;
+      }
+    </script>
+  </body>
+</html>
