@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lab10 jQuery - Завдання 3</title>
+    <!-- Підключення бібліотеки jQuery -->
+    <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Додавання рамки та заливки для div при одинарному/подвійному кліку
+        $("#special_div")
+          .bind("click", function () {
+            $(this).addClass("clicked");
+          })
+          .bind("dblclick", function () {
+            $(this).removeClass("clicked");
+          });
+
+        // Повідомлення для кнопок
+        $("#single_click_button").bind("click", function () {
+          alert("Одинарний клік");
+        });
+        $("#double_click_button").bind("dblclick", function () {
+          alert("Подвійний клік");
+        });
+
+        // Відображення/приховування зображення
+        $("#show_image").bind("click", function () {
+          $("#image").fadeIn();
+        });
+        $("#image")
+          .bind("click", function () {
+            $(this).fadeOut();
+          })
+          .bind("mouseover", function () {
+            $(this).attr("title", "Підпис до зображення");
+          });
+
+        // Перевірка коректності введення
+        $("form").submit(function () {
+          if ($("input:first").val() == "correct") {
+            $("span").text("Успішно!").show();
+            return true;
+          }
+          $("span").text("Неправильно!").show().fadeOut(1000);
+          return false;
+        });
+      });
+    </script>
+    <style>
+      /* Стиль для спеціального div */
+      #special_div {
+        width: 200px;
+        height: 100px;
+        background-color: lightgray;
+        margin: 20px 0;
+      }
+      .clicked {
+        border: 3px solid blue;
+        background-color: lightblue;
+      }
+
+      /* Стиль для зображення */
+      #image {
+        display: none;
+        max-width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab10.html">Лабораторна 10</a>
+    <a href="../index.html">На головну</a>
+    <h1>Завдання 3</h1>
+
+    <!-- Спеціальний div -->
+    <div id="special_div">Натисніть або двічі натисніть на мене</div>
+
+    <!-- Кнопки -->
+    <button id="single_click_button">Одинарний клік</button>
+    <button id="double_click_button">Подвійний клік</button>
+
+    <!-- Показати зображення -->
+    <p id="show_image" style="cursor: pointer; color: blue">
+      Показати зображення
+    </p>
+    <img
+      id="image"
+      src="https://via.placeholder.com/300"
+      alt="Placeholder Image"
+    />
+
+    <!-- Форма перевірки -->
+    <p>Введіть в текстове поле слово 'correct'.</p>
+    <form action="javascript:alert('Успішно!');">
+      <div>
+        <input type="text" />
+        <input type="submit" value="Перевірити" />
+      </div>
+    </form>
+    <span></span>
+  </body>
+</html>

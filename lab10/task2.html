@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lab10 jQuery - Завдання 2</title>
+    <!-- Підключення бібліотеки jQuery -->
+    <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
+    <style>
+      /* Додаткові стилі */
+      .hover-style {
+        background-color: #ffcccb;
+        border: 2px solid #ff6666;
+        transition: background-color 0.3s ease, border 0.3s ease;
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        // Повідомлення про готовність бібліотеки
+        alert("Бібліотека jQuery готова до роботи!");
+
+        // Приховуємо текст спочатку
+        var $text = $("#hide_text");
+        $text.hide();
+
+        // Додаємо текст для першого і останнього абзацу
+        $("p:first").text("DOM first!");
+        $("p:last").text("DOM last!");
+
+        // Показуємо текст при натисканні на кнопку
+        $(".button").click(function () {
+          $text.show(200);
+        });
+
+        // Додаємо стилі при наведенні миші
+        $("div").hover(
+          function () {
+            $(this).addClass("hover-style");
+          },
+          function () {
+            $(this).removeClass("hover-style");
+          }
+        );
+      });
+    </script>
+  </head>
+  <body>
+    <a href="./lab10.html">Лабораторна 10</a>
+    <a href="../index.html">На головну</a>
+    <h1>Контент сторінки</h1>
+
+    <!-- Абзаци -->
+    <p>Це перший абзац.</p>
+    <p>Це другий абзац.</p>
+    <p>Це третій абзац.</p>
+
+    <!-- Кнопка -->
+    <a href="#" class="button">Натисніть, щоб показати текст</a>
+
+    <!-- Див -->
+    <div id="hide_text">Демонстраційний прихований текст</div>
+  </body>
+</html>

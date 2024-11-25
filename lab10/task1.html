@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lab10 jQuery</title>
+    <!-- Підключення бібліотеки jQuery -->
+    <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
+    <script>
+      // Код на jQuery
+      $(document).ready(function () {
+        alert("Бібліотека jQuery готова до роботи!"); // Повідомлення про готовність бібліотеки
+
+        var $text = $("#hide_text"); // Отримуємо елемент із id hide_text
+        $text.hide(); // Приховуємо елемент
+
+        $(".button").click(function () {
+          // Додаємо обробник події click
+          $text.show(200); // Показуємо текст із затримкою 200 мс
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <a href="./lab10.html">Лабораторна 10</a>
+    <a href="../index.html">На головну</a>
+    <h1>Контент сторінки</h1>
+    <a href="#" class="button">Натисніть, щоб показати текст</a>
+    <div id="hide_text">Демонстраційний прихований текст</div>
+  </body>
+</html>
