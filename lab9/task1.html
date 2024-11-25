@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Animations with Delay</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      #container {
+        position: relative;
+        width: 400px;
+        height: 200px;
+        border: 1px solid black;
+        margin: 20px auto;
+      }
+      #simpleBox,
+      #easingBox {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 20px;
+      }
+      #simpleBox {
+        background: red;
+      }
+      #easingBox {
+        background: blue;
+        top: 90px;
+      }
+      .ball {
+        width: 20px;
+        height: 20px;
+        background: green;
+        position: absolute;
+        border-radius: 50%;
+      }
+      .ball:nth-child(2) {
+        background: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab9.html">Лабораторна 9</a>
+    <a href="../index.html">На головну</a>
+    <h1>JavaScript Animations with Delay</h1>
+    <div id="container">
+      <div id="simpleBox"></div>
+      <div id="easingBox"></div>
+      <div class="ball"></div>
+      <div class="ball"></div>
+    </div>
+
+    <script>
+      // Простий рух квадрата
+      function animateSimpleBox() {
+        let simpleBox = document.getElementById("simpleBox");
+        let start = null;
+
+        function animate(time) {
+          if (!start) start = time;
+          let progress = time - start;
+          simpleBox.style.left = Math.min(progress / 10, 300) + "px";
+          if (progress < 3000) {
+            requestAnimationFrame(animate);
+          } else {
+            setTimeout(animateSimpleBox, 1000); // Перезапустити через 1 секунду
+          }
+        }
+        simpleBox.style.left = "0px"; // Скинути початкову позицію
+        requestAnimationFrame(animate);
+      }
+      animateSimpleBox();
+
+      // Рух квадрата з easing-функцією
+      function animateEasingBox() {
+        let easingBox = document.getElementById("easingBox");
+        let start = null;
+
+        function easeInOut(t) {
+          return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+        }
+
+        function animate(time) {
+          if (!start) start = time;
+          let progress = (time - start) / 2000;
+          let easedProgress = easeInOut(progress);
+          easingBox.style.left = Math.min(easedProgress * 300, 300) + "px";
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            setTimeout(animateEasingBox, 1000); // Перезапустити через 1 секунду
+          }
+        }
+        easingBox.style.left = "0px"; // Скинути початкову позицію
+        requestAnimationFrame(animate);
+      }
+      animateEasingBox();
+
+      // Багато об'єктів у русі
+      function animateBalls() {
+        let balls = document.querySelectorAll(".ball");
+        balls.forEach((ball, index) => {
+          let start = null;
+
+          function animate(time) {
+            if (!start) start = time;
+            let progress = (time - start) / 2000 + index * 0.5;
+            let x = 150 + Math.sin(progress * Math.PI * 2) * 100;
+            let y = 100 + Math.cos(progress * Math.PI * 2) * 50;
+            ball.style.left = x + "px";
+            ball.style.top = y + "px";
+
+            if (progress < 2) {
+              requestAnimationFrame(animate);
+            } else if (index === balls.length - 1) {
+              setTimeout(animateBalls, 1000); // Перезапустити через 1 секунду
+            }
+          }
+          ball.style.left = "150px"; // Скинути початкову позицію
+          ball.style.top = "100px";
+          requestAnimationFrame(animate);
+        });
+      }
+      animateBalls();
+    </script>
+  </body>
+</html>

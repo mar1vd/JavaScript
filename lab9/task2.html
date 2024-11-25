@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>121 Інженерія програмного забезпечення - Анімований логотип</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      a {
+        position: absolute;
+        top: 10px;
+        color: #3498db;
+        font-size: 18px;
+        text-decoration: none;
+        margin-right: 10px;
+      }
+      a:first-child {
+        left: 10px;
+      }
+      a:last-child {
+        left: 150px;
+      }
+      #logoContainer {
+        position: relative;
+        width: 300px;
+        height: 300px;
+      }
+      #circle {
+        width: 100px;
+        height: 100px;
+        background-color: #3498db;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #text {
+        font-size: 24px;
+        color: #2c3e50;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 1s;
+      }
+      #newObject {
+        width: 50px;
+        height: 50px;
+        background-color: #e74c3c;
+        border-radius: 50%;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        opacity: 0;
+      }
+      button {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        background-color: #2ecc71;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 18px;
+        border-radius: 5px;
+      }
+      button:active {
+        transform: translateX(-50%) scale(0.95);
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab9.html">Лабораторна 9</a><br />
+    <a href="../index.html">На головну</a>
+    <div id="logoContainer">
+      <div id="circle"></div>
+      <div id="text">Інженерія програмного забезпечення</div>
+      <div id="newObject"></div>
+      <button onclick="toggleAnimation()">Старт/Стоп анімації</button>
+    </div>
+
+    <script>
+      let isAnimating = false;
+      let circle = document.getElementById("circle");
+      let text = document.getElementById("text");
+      let newObject = document.getElementById("newObject");
+      let logoContainer = document.getElementById("logoContainer");
+
+      function toggleAnimation() {
+        if (isAnimating) {
+          // Якщо анімація активна, зупинити
+          isAnimating = false;
+          text.style.opacity = 0;
+          circle.style.transition = "none"; // Зупинити всі анімації
+          circle.style.transform = "translate(-50%, -50%)"; // Відновити початкову позицію
+          newObject.style.opacity = 0;
+        } else {
+          // Якщо анімація зупинена, почати
+          isAnimating = true;
+          text.style.opacity = 1; // Текст стає видимим
+          startAnimations();
+        }
+      }
+
+      function startAnimations() {
+        // Анімація для кола
+        circle.style.transition =
+          "transform 2s ease-in-out, width 2s ease, height 2s ease";
+        circle.style.transform = "translate(-50%, -50%) rotate(360deg)";
+        circle.style.width = "150px";
+        circle.style.height = "150px";
+
+        // Анімація для нового об'єкта
+        newObject.style.transition =
+          "opacity 1s ease, top 2s ease, left 2s ease";
+        newObject.style.opacity = 1;
+        newObject.style.top = "70%";
+        newObject.style.left = "70%";
+
+        // Анімація для тексту
+        setTimeout(() => {
+          text.style.opacity = 0; // Текст зникає через 3 секунди
+        }, 3000);
+
+        // Повернути все через 5 секунд
+        setTimeout(() => {
+          resetAnimations();
+        }, 5000);
+      }
+
+      function resetAnimations() {
+        // Відновити початкові стани після анімації
+        circle.style.transition =
+          "transform 1s ease-in-out, width 1s ease, height 1s ease";
+        circle.style.transform = "translate(-50%, -50%)";
+        circle.style.width = "100px";
+        circle.style.height = "100px";
+
+        newObject.style.transition =
+          "opacity 1s ease, top 2s ease, left 2s ease";
+        newObject.style.opacity = 0;
+        newObject.style.top = "10%";
+        newObject.style.left = "10%";
+
+        // Відновлення тексту, щоб він знову з'явився
+        text.style.opacity = 1;
+
+        setTimeout(() => {
+          if (isAnimating) startAnimations(); // Повторно запустити анімацію
+        }, 1000);
+      }
+
+      // Початкові стани
+      text.style.opacity = 0;
+      newObject.style.opacity = 0;
+    </script>
+  </body>
+</html>
