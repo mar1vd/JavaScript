@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Advanced Methods Demo</title>
+    <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
+    <style>
+      .highlight {
+        color: blue;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab11.html">Лабораторна 11</a>
+    <a href="../index.html">На головну</a>
+    <button id="dataBtn">$.data()</button>
+    <button id="extendBtn">$.extend()</button>
+    <button id="fnExtendBtn">$.fn.extend()</button>
+    <button id="globalEvalBtn">$.globalEval()</button>
+
+    <div id="dataContainer">Data Container</div>
+    <p id="exampleParagraph">Example Paragraph</p>
+
+    <script>
+      $(document).ready(function () {
+        // $.data()
+        $("#dataBtn").on("click", function () {
+          const element = $("#dataContainer")[0];
+          $.data(element, "customData", { key: "value", anotherKey: 42 });
+          const storedData = $.data(element, "customData");
+          console.log("Stored Data:", storedData);
+          alert(`Custom Data: ${JSON.stringify(storedData)}`);
+        });
+
+        // $.extend()
+        $("#extendBtn").on("click", function () {
+          const defaultSettings = {
+            color: "red",
+            fontSize: "16px",
+          };
+          const userSettings = {
+            fontSize: "20px",
+            fontWeight: "bold",
+          };
+          const finalSettings = $.extend({}, defaultSettings, userSettings);
+          console.log("Final Settings:", finalSettings);
+          alert(`Final Settings: ${JSON.stringify(finalSettings)}`);
+        });
+
+        // $.fn.extend()
+        $.fn.extend({
+          highlightText: function () {
+            return this.each(function () {
+              $(this).addClass("highlight");
+            });
+          },
+        });
+
+        $("#fnExtendBtn").on("click", function () {
+          $("#exampleParagraph").highlightText();
+        });
+
+        // $.globalEval()
+        $("#globalEvalBtn").on("click", function () {
+          const script =
+            "console.log('Global script executed'); alert('Global Eval Executed!');";
+          $.globalEval(script);
+        });
+      });
+    </script>
+  </body>
+</html>

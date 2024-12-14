@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Methods Buttons</title>
+    <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
+    <style>
+      .container {
+        margin: 20px;
+        padding: 10px;
+        border: 1px solid black;
+      }
+      .highlight {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="./lab11.html">Лабораторна 11</a>
+    <a href="../index.html">На головну</a>
+    <div class="controls">
+      <button id="addBackBtn">.addBack()</button>
+      <button id="hasBtn">.has()</button>
+      <button id="childrenBtn">.children()</button>
+      <button id="lastBtn">.last()</button>
+      <button id="parentsBtn">.parents()</button>
+    </div>
+
+    <div class="container">
+      <div class="group1">
+        <p class="item">Item 1</p>
+        <p class="item">Item 2 <span>Nested</span></p>
+        <p class="item">Item 3</p>
+      </div>
+      <div class="group2">
+        <p class="item">Item A</p>
+        <p class="item">Item B</p>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // .addBack()
+        $("#addBackBtn").on("click", function () {
+          $(".group1")
+            .find(".item")
+            .filter(".highlight")
+            .removeClass("highlight")
+            .end()
+            .addBack()
+            .addClass("highlight");
+        });
+
+        // .has()
+        $("#hasBtn").on("click", function () {
+          $(".container")
+            .find("p")
+            .removeClass("highlight")
+            .has("span")
+            .addClass("highlight");
+        });
+
+        // .children()
+        $("#childrenBtn").on("click", function () {
+          $(".container").children(".group1").children().addClass("highlight");
+        });
+
+        // .last()
+        $("#lastBtn").on("click", function () {
+          $(".container")
+            .find("p")
+            .removeClass("highlight")
+            .last()
+            .addClass("highlight");
+        });
+
+        // .parents()
+        $("#parentsBtn").on("click", function () {
+          $("span").parents(".container").addClass("highlight");
+        });
+      });
+    </script>
+  </body>
+</html>

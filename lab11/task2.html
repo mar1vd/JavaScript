@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery New Methods Demo</title>
+    <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // 1. .appendTo(): Додати елемент до іншого елемента
+        $("<p>Appended paragraph</p>").appendTo("#container");
+
+        // 2. .replaceWith(): Замінити елемент іншим
+        $("#replaceTarget").replaceWith("<h2>Replaced Element</h2>");
+
+        // 3. .width(function): Встановлення ширини за допомогою функції
+        $("#dynamicBox").width(function (index, currentWidth) {
+          console.log("Current width:", currentWidth);
+          return currentWidth + 50; // Збільшити ширину на 50px
+        });
+
+        // 4. .outerWidth(): Отримати зовнішню ширину елемента (включаючи padding і border)
+        console.log(
+          "Outer width of dynamicBox:",
+          $("#dynamicBox").outerWidth()
+        );
+      });
+    </script>
+  </head>
+  <body>
+    <a href="./lab11.html">Лабораторна 11</a>
+    <a href="../index.html">На головну</a>
+    <div id="container">
+      <div id="replaceTarget">This will be replaced</div>
+      <div
+        id="dynamicBox"
+        style="
+          width: 100px;
+          height: 50px;
+          background: lightgreen;
+          border: 2px solid green;
+          padding: 10px;
+        "
+      >
+        Dynamic Box
+      </div>
+    </div>
+  </body>
+</html>

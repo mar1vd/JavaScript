@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Methods Demo</title>
+    <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // 1. .html(): отримання та зміна HTML вмісту
+        console.log("Original HTML:", $("#content").html()); // Отримати HTML
+        $("#content").html("<strong>Updated content!</strong>"); // Змінити HTML
+
+        // 2. .css(): отримання та встановлення CSS властивостей
+        console.log("Box background:", $("#box").css("background")); // Отримати CSS властивість
+        $("#box").css({
+          background: "blue",
+          "border-radius": "10px",
+        }); // Змінити CSS властивості
+
+        // 3. .val(): отримання та встановлення значення інпуту
+        console.log("Input value:", $("#inputBox").val()); // Отримати значення
+        $("#inputBox").val("New Value"); // Змінити значення
+
+        // 4. .attr(ім'я атрибута): отримання значення атрибута
+        console.log("Link href:", $("#link").attr("href")); // Отримати атрибут
+
+        // 5. .attr(ім'я атрибута, значення): встановлення значення атрибута
+        $("#link").attr("href", "https://newexample.com"); // Змінити атрибут
+
+        // 6. .attr(атрибути): встановлення кількох атрибутів одночасно
+        $("#link").attr({
+          target: "_blank",
+          title: "New Title",
+        });
+
+        // 7. .attr(ім'я атрибута, функція): встановлення атрибута за допомогою функції
+        $("#link").attr("data-info", function (index, currentValue) {
+          return currentValue ? currentValue + " updated" : "new-info";
+        });
+
+        // 8. .removeAttr(): видалення атрибута
+        $("#link").removeAttr("target");
+        console.log("After removeAttr, target:", $("#link").attr("target")); // Перевірка видалення
+      });
+    </script>
+  </head>
+  <body>
+    <a href="./lab11.html">Лабораторна 11</a>
+    <a href="../index.html">На головну</a>
+    <div id="content">Hello, world!</div>
+    <div id="box" style="width: 100px; height: 100px; background: red"></div>
+    <input id="inputBox" type="text" value="Default Value" />
+    <a id="link" href="https://example.com">Visit Example</a>
+  </body>
+</html>
