@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery Animation Example</title>
+    <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        // Додаємо базову структуру до DOM
+        $("body").append(`
+                <div id="box" style="width: 100px; height: 100px; background-color: blue; margin: 20px; display: none;"></div>
+                <button id="start">Start Animation</button>
+            `);
+
+        // Клік на кнопку "Start Animation"
+        $("#start").click(function () {
+          const $box = $("#box");
+
+          // Плавна поява елемента
+          $box
+            .fadeIn(1000)
+            .delay(500) // Затримка перед наступною анімацією
+            .queue(function (next) {
+              // Зміна розмірів і кольору елемента
+              $(this).animate(
+                {
+                  width: "200px",
+                  height: "200px",
+                  backgroundColor: "#ff0000",
+                },
+                1000
+              );
+              next(); // Переходимо до наступної анімації в черзі
+            })
+            .delay(500)
+            .fadeOut(1000) // Зникнення елемента
+            .queue(function (next) {
+              // Повернення до початкового стану
+              $(this).css({
+                width: "100px",
+                height: "100px",
+                backgroundColor: "blue",
+                display: "none",
+              });
+              next(); // Завершення черги
+            });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <a href="./lab12.html">Лабораторна 12</a>
+    <a href="../index.html">На головну</a>
+  </body>
+</html>

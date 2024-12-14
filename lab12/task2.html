@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Logo - 121 Software Engineering</title>
+    <script type="text/javascript" src="../jquery-3.7.1.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .links-container {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        display: flex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        margin-right: 15px;
+      }
+      #logo {
+        width: 150px;
+        height: 150px;
+        background-color: #007bff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        opacity: 0;
+        position: relative;
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        const $logo = $('<div id="logo">121 Software Engineering</div>');
+        $("body").append($logo);
+
+        // First animation: Size increase and opacity change
+        $logo.animate(
+          {
+            width: "200px", // Increasing width
+            height: "200px", // Increasing height
+            opacity: 1, // Fade in
+          },
+          {
+            duration: 1500, // Animation duration
+            easing: "swing", // Animation easing
+            complete: function () {
+              // Second animation: Background color, font size, and top positioning change
+              $logo.animate(
+                {
+                  backgroundColor: "#28a745", // Background color change
+                  fontSize: "24px", // Font size increase
+                  top: "20px", // Move logo down
+                },
+                {
+                  duration: 1000, // Animation duration
+                  easing: "linear", // Animation easing
+                  complete: function () {
+                    // Final action
+                    console.log("Animation Complete!");
+                  },
+                }
+              );
+            },
+            step: function (now, fx) {
+              // Ensure backgroundColor animates by changing the RGBA color value
+              if (fx.prop === "backgroundColor") {
+                const newColor =
+                  "rgb(" +
+                  Math.round(now) +
+                  "," +
+                  Math.round(now) +
+                  "," +
+                  Math.round(now) +
+                  ")";
+                $logo.css("background-color", newColor);
+              }
+            },
+          }
+        );
+
+        // Adding optional settings in the options object
+        let options = {
+          duration: 1500,
+          easing: "easeOutBounce",
+          queue: false,
+        };
+      });
+    </script>
+  </head>
+  <body>
+    <div class="links-container">
+      <a href="./lab12.html">Лабораторна 12</a>
+      <a href="../index.html">На головну</a>
+    </div>
+  </body>
+</html>
